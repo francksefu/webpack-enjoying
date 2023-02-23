@@ -1,4 +1,4 @@
-# my-books
+# To Do list
 <a name="readme-top"></a>
 
 <div align="center">
@@ -26,7 +26,7 @@
 - [🙏 Acknowledgements](#acknowledgements)
 - [📝 License](#license)
 
-# 📖 My books <a name="about-project"></a>
+# 📖 To Do list <a name="about-project"></a>
 
 
 This is a project about adding and removing to do task to the list of task we  have. 
