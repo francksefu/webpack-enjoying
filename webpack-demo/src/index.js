@@ -72,7 +72,7 @@ const completeTask = () => {
     articleRemove.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         arr[arr.indexOf(obj)].description = document.getElementById(inputId).value;
-        let upd = document.getElementById(inputId).value;
+        const upd = document.getElementById(inputId).value;
         articleRemove.style.display = 'none';
         article.style.display = 'flex';
         article.innerHTML = `
