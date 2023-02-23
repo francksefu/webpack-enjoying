@@ -72,11 +72,11 @@ const completeTask = () => {
     articleRemove.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         arr[arr.indexOf(obj)].description = document.getElementById(inputId).value;
-        updateValue = document.getElementById(inputId).value;
+        let upd = document.getElementById(inputId).value;
         articleRemove.style.display = 'none';
         article.style.display = 'flex';
         article.innerHTML = `
-            <span><input type="checkbox" class="padding" name="" id="${arr.length - 1}"><label for="${arr.length - 1}">${updateValue}
+            <span><input type="checkbox" class="padding" name="" id="${arr.length - 1}"><label for="${arr.length - 1}">${upd}
             </label><span>`;
         article.appendChild(span);
         if (arr.length !== 0) {
