@@ -69,3 +69,16 @@ li {
 .padding {
   margin-right: 10px;
 }
+
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.flex-around > input[type="checkbox"] {
+  width: auto;
+}
+
+.padding-left {
+  margin-left: 10px;
+}
