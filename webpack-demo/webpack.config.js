@@ -5,6 +5,7 @@ module.exports = {
   mode: 'development',
   entry: {
     index: './src/index.js',
+    print: './src/array-feature.js',
   },
   devServer: {
     static: './dist',

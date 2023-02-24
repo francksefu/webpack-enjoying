@@ -2,37 +2,102 @@ import _ from 'lodash';
 
 import './style.css';
 
-const arr = [
-  { description: 'Wash car', completed: false, index: 0 },
-  { description: 'study', completed: false, index: 1 },
-  { description: 'prier', completed: true, index: 2 },
-  { description: 'Help parent', completed: false, index: 3 },
-];
+import { arr, add, inputAdd } from './array-feature.js';
+
 const use = _;
-const container = document.querySelector('.container');
 
-let check = 'checked';
-function completeTask() {
-  const ul = document.createElement('ul');
-  for (let i = 0; i < arr.length; i += 1) {
-    if (arr[i].completed === true && use !== 1) {
-      check = 'checked';
-    } else {
-      check = '';
+const ul = document.querySelector('ul');
+let updateValue = '';
+const restored = JSON.parse(localStorage.getItem('toDoList'));
+const completeTask = () => {
+  /**
+   * Update index every time
+   */
+
+  if (arr.length !== 0 && use !== 1) {
+    for (let y = 0; y < arr.length; y += 1) {
+      arr[y].index = y;
     }
-    ul.innerHTML += `<li class="flex">
-    <label for="${i}">
-        <input type="checkbox" class="padding" ${check} name="" id="${i}">${arr[i].description}
-    </label>
-        <span class="material-symbols-outlined sombre flotteur">
-        more_vert
-        </span>
-</li>`;
   }
-  ul.innerHTML += `<li class="last-button">
-  Clear all completed
-</li>`;
-  container.appendChild(ul);
-}
+  for (let p = 0; p < arr.length; p += 1) {
+    const obj = arr[p];
+    const lilast = document.createElement('li');
+    const article = document.createElement('article');
+    const articleRemove = document.createElement('article');
+    const inputId = `in${arr.indexOf(obj)}`;
+    updateValue = arr[arr.indexOf(obj)].description;
 
-window.addEventListener('load', completeTask);
+    const span = document.createElement('span');
+    const deleteButton = document.createElement('span');
+    span.classList.add('material-symbols-outlined', 'sombre', 'flotteur');
+    deleteButton.classList.add('material-symbols-outlined', 'sombre');
+    deleteButton.textContent = 'delete';
+    span.textContent = 'more_vert';
+    article.innerHTML = `
+    <span><input type="checkbox" class="padding" name="" id="${arr.indexOf(obj)}"><label for="${p}">${updateValue}
+    </label><span>`;
+    articleRemove.innerHTML = `<input type="checkbox" class="padding-left" name="" id="r${p}">
+    <input type='text' id='${inputId}' value='${obj.description}'>`;
+    articleRemove.appendChild(deleteButton);
+    articleRemove.style.backgroundColor = 'rgba(222, 238, 79, 0.8)';
+    article.appendChild(span);
+    article.classList.add('flex');
+    articleRemove.classList.add('flex-around');
+    articleRemove.style.display = 'none';
+    const items = document.querySelectorAll('li');
+    const last = items[items.length - 1];
+    ul.insertBefore(lilast, last);
+    lilast.appendChild(article);
+    lilast.appendChild(articleRemove);
+    inputAdd.value = '';
+    span.addEventListener('click', () => {
+      articleRemove.style.display = 'flex';
+      article.style.display = 'none';
+    });
+
+    /**
+     * delete and update feature when page load
+     */
+
+    deleteButton.addEventListener('click', () => {
+      lilast.remove();
+      arr.splice(arr.indexOf(obj), 1);
+      if (arr.length !== 0) {
+        for (let y = 0; y < arr.length; y += 1) {
+          arr[y].index = y;
+        }
+      }
+      localStorage.setItem('toDoList', JSON.stringify(arr));
+    });
+    articleRemove.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        arr[arr.indexOf(obj)].description = document.getElementById(inputId).value;
+        const upd = document.getElementById(inputId).value;
+        articleRemove.style.display = 'none';
+        article.style.display = 'flex';
+        article.innerHTML = `
+            <span><input type="checkbox" class="padding" name="" id="${arr.length - 1}"><label for="${arr.length - 1}">${upd}
+            </label><span>`;
+        article.appendChild(span);
+        if (arr.length !== 0) {
+          for (let y = 0; y < arr.length; y += 1) {
+            arr[y].index = y;
+          }
+        }
+        localStorage.setItem('toDoList', JSON.stringify(arr));
+      }
+    });
+  }
+};
+
+window.addEventListener('load', () => {
+  for (let k = 0; k < restored.length; k += 1) {
+    arr[k] = restored[k];
+  }
+  completeTask();
+});
+inputAdd.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    add();
+  }
+});
