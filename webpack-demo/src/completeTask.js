@@ -24,7 +24,7 @@ const completer = (arrs) => {
     });
   }
 };
-  
+
 const checker = (arrs) => {
   const inputCheck = document.querySelectorAll('.checky');
   const long = inputCheck.length;
@@ -39,5 +39,5 @@ const checker = (arrs) => {
     }
   }
 };
-  
-  export { completer, checker };
+
+export { completer, checker };
