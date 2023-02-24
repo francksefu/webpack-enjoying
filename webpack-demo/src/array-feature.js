@@ -1,9 +1,20 @@
-import { checkerL } from './completeTask';
-
 const arr = [];
 
 const inputAdd = document.querySelector('#writable');
 let updateValue = '';
+
+const checkerL = () => {
+  const inputCheck = document.querySelectorAll('.checky-left');
+  const li = document.querySelectorAll('li');
+  const long = li.length;
+  for (let i = 0; i < long; i += 1) {
+    if (arr[i].completed === true) {
+      inputCheck[i].checked = true;
+    } else {
+      inputCheck[i].checked = false;
+    }
+  }
+};
 
 const add = () => {
   if (arr.length !== 0) {
@@ -76,4 +87,6 @@ const add = () => {
   });
 };
 
-export { arr, add, inputAdd };
+export {
+  arr, add, inputAdd, checkerL,
+};

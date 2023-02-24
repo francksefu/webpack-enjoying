@@ -2,9 +2,11 @@ import _ from 'lodash';
 
 import './style.css';
 
-import { arr, add, inputAdd } from './array-feature.js';
+import {
+  arr, add, inputAdd, checkerL,
+} from './array-feature.js';
 
-import { completer, checker, checkerL } from './completeTask.js';
+import { completer, checker } from './completeTask.js';
 
 const use = _;
 
@@ -91,7 +93,7 @@ const completeTask = () => {
         localStorage.setItem('toDoList', JSON.stringify(arr));
       }
     });
-    checker();
+    checker(arr);
   }
 };
 
@@ -100,7 +102,7 @@ window.addEventListener('load', () => {
     arr[k] = restored[k];
   }
   completeTask();
-  completer();
+  completer(arr);
 });
 inputAdd.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
@@ -109,7 +111,7 @@ inputAdd.addEventListener('keypress', (e) => {
 });
 
 ul.addEventListener('click', () => {
-  completer();
+  completer(arr);
 });
 
 rmbtn.addEventListener('click', () => {
