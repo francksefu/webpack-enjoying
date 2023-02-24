@@ -1,4 +1,5 @@
-import { checkerL } from "./completeTask";
+import { checkerL } from './completeTask';
+
 const arr = [];
 
 const inputAdd = document.querySelector('#writable');

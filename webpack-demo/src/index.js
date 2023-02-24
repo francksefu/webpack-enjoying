@@ -113,10 +113,24 @@ ul.addEventListener('click', () => {
 });
 
 rmbtn.addEventListener('click', () => {
-  const avengers = arr.filter(character => character.completed === true);
+  const tab = [];
+  let m = 0;
+  for (let t = 0; t < arr.length; t += 1) {
+    if (arr[t].completed === true) {
+      tab.push(t - m);
+      m += 1;
+    }
+  }
+
+  for (let p = 0; p < tab.length; p += 1) {
+    document.querySelectorAll('li')[tab[p]].remove();
+  }
+
+  const avengers = arr.filter((character) => character.completed === false);
   arr.splice(0, arr.length);
-  for(let j = 0; j < avengers.length; j += 1){
+  for (let j = 0; j < avengers.length; j += 1) {
     arr[j] = avengers[j];
+    arr[j].index = j;
   }
   localStorage.setItem('toDoList', JSON.stringify(arr));
 });
