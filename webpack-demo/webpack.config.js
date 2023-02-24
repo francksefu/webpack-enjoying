@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     index: './src/index.js',
     print: './src/array-feature.js',
+    print2: './src/completeTask.js',
   },
   devServer: {
     static: './dist',

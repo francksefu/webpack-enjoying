@@ -1,3 +1,4 @@
+import { checkerL } from "./completeTask";
 const arr = [];
 
 const inputAdd = document.querySelector('#writable');
@@ -26,10 +27,10 @@ const add = () => {
   deleteButton.textContent = 'delete';
   span.textContent = 'more_vert';
   article.innerHTML = `
-    <span><input type="checkbox" class="padding" name="" id="${arr.length - 1}"><label for="${arr.length - 1}">${updateValue}
+    <span><input type="checkbox" class="padding checky" name="" id="${arr.length - 1}"><label for="${arr.length - 1}">${updateValue}
     </label><span>`;
   // articleRemove.appendChild(inputRemove);
-  articleRemove.innerHTML = `<input type="checkbox" class="padding-left" name="" id="${arr.length - 1}">
+  articleRemove.innerHTML = `<input type="checkbox" class="padding-left checky-left" name="" id="${arr.length - 1}">
     <input type='text' id='${inputId}' value='${obj.description}'>`;
   articleRemove.appendChild(deleteButton);
   articleRemove.style.backgroundColor = 'rgba(222, 238, 79, 0.8)';
@@ -46,6 +47,7 @@ const add = () => {
   span.addEventListener('click', () => {
     articleRemove.style.display = 'flex';
     article.style.display = 'none';
+    checkerL();
   });
   deleteButton.addEventListener('click', () => {
     lilast.remove();
@@ -62,7 +64,7 @@ const add = () => {
       articleRemove.style.display = 'none';
       article.style.display = 'flex';
       article.innerHTML = `
-            <span><input type="checkbox" class="padding" name="" id="${arr.length - 1}"><label for="${arr.length - 1}">${updateValue}
+            <span><input type="checkbox" class="padding checky" name="" id="${arr.length - 1}"><label for="${arr.length - 1}">${updateValue}
             </label><span>`;
       article.appendChild(span);
       for (let y = 0; y < arr.length; y += 1) {

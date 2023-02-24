@@ -4,9 +4,12 @@ import './style.css';
 
 import { arr, add, inputAdd } from './array-feature.js';
 
+import { completer, checker, checkerL } from './completeTask.js';
+
 const use = _;
 
 const ul = document.querySelector('ul');
+const rmbtn = document.querySelector('.last-button');
 let updateValue = '';
 const restored = JSON.parse(localStorage.getItem('toDoList'));
 const completeTask = () => {
@@ -34,9 +37,9 @@ const completeTask = () => {
     deleteButton.textContent = 'delete';
     span.textContent = 'more_vert';
     article.innerHTML = `
-    <span><input type="checkbox" class="padding" name="" id="${arr.indexOf(obj)}"><label for="${p}">${updateValue}
+    <span><input type="checkbox" class="padding checky" name="" id="${arr.indexOf(obj)}"><label for="${p}">${updateValue}
     </label><span>`;
-    articleRemove.innerHTML = `<input type="checkbox" class="padding-left" name="" id="r${p}">
+    articleRemove.innerHTML = `<input type="checkbox" class="padding-left checky-left" name="" id="r${p}">
     <input type='text' id='${inputId}' value='${obj.description}'>`;
     articleRemove.appendChild(deleteButton);
     articleRemove.style.backgroundColor = 'rgba(222, 238, 79, 0.8)';
@@ -53,6 +56,7 @@ const completeTask = () => {
     span.addEventListener('click', () => {
       articleRemove.style.display = 'flex';
       article.style.display = 'none';
+      checkerL();
     });
 
     /**
@@ -76,7 +80,7 @@ const completeTask = () => {
         articleRemove.style.display = 'none';
         article.style.display = 'flex';
         article.innerHTML = `
-            <span><input type="checkbox" class="padding" name="" id="${arr.length - 1}"><label for="${arr.length - 1}">${upd}
+            <span><input type="checkbox" class="padding checky" name="" id="${arr.length - 1}"><label for="${arr.length - 1}">${upd}
             </label><span>`;
         article.appendChild(span);
         if (arr.length !== 0) {
@@ -87,6 +91,7 @@ const completeTask = () => {
         localStorage.setItem('toDoList', JSON.stringify(arr));
       }
     });
+    checker();
   }
 };
 
@@ -95,9 +100,23 @@ window.addEventListener('load', () => {
     arr[k] = restored[k];
   }
   completeTask();
+  completer();
 });
 inputAdd.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     add();
   }
+});
+
+ul.addEventListener('click', () => {
+  completer();
+});
+
+rmbtn.addEventListener('click', () => {
+  const avengers = arr.filter(character => character.completed === true);
+  arr.splice(0, arr.length);
+  for(let j = 0; j < avengers.length; j += 1){
+    arr[j] = avengers[j];
+  }
+  localStorage.setItem('toDoList', JSON.stringify(arr));
 });
