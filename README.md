@@ -54,7 +54,7 @@ This is a project about adding and removing to do task to the list of task we  h
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- not available yet
+- [click here](https://francksefu.github.io/webpack-enjoying/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
